@@ -1,4 +1,5 @@
 from utils import utils
+from pprint import pprint
 
 class dados_ibge():
 
@@ -34,10 +35,19 @@ class dados_ibge():
     def get_Nome_By_UF(nome: str, id_uf: int):
         url = f"https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}"
         params = {
-            'sexo': 'M',
             'localidade': id_uf
         }
 
         resultado = utils.fazer_requests(url=url,params=params)
 
         return resultado[0]
+
+    @staticmethod
+    def get_Frequencia(nome: str):
+        url = f"https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}"
+        params = {}
+
+        return utils.fazer_requests(url=url,params=params)
+
+if __name__ == '__main__':
+     pprint(dados_ibge.get_Frequencia('Miqueias'))
