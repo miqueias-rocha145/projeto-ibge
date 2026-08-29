@@ -1,7 +1,6 @@
 import requests
 from app.back.ibge import dados_ibge
 
-
 def fazer_requests(url: str, params: dict = None):
     resposta = requests.get(
          url, 
@@ -32,6 +31,9 @@ def tabela_Nome_By_Uf(nome: str) -> dict[str, float]:
 def tabela_Frequencia_Decadas(nome) -> dict[str, int]:
      dados = dados_ibge.get_Frequencia(nome)
 
+     if not dados:
+          return {}
+
      tabela_final = {
           item['periodo'].replace('[','').replace(',','-'):
           item['frequencia']
@@ -40,7 +42,6 @@ def tabela_Frequencia_Decadas(nome) -> dict[str, int]:
      }
 
      return tabela_final
-
 
 if __name__ == '__main__':
      pass
